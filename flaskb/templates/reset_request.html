@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<header class="main-header post-head " style="background-image: url(assets/img/random.jpg)">
+    <div class="vertical">
+        <div class="main-header-content inner">
+            <h1 class="post-title">Reset Request</h1>
+            <div class="entry-title-divider">
+                <span></span><span></span><span></span>
+            </div>
+            
+        </div>
+    </div>
+</header>
+
+<main id="content" class="content" role="main">
+    <div class="wraps">
+        <div class="grid">
+            <div class="grid-item ">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+
+                    <fieldset class="form-group">
+                        
+
+                        <div class="form-group">
+                            {{ form.email.label(class="form-control-label") }}
+
+                            {% if form.email.errors %}
+                            {{ form.email(class="form-control is-invalid form-control-lg") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.email(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                    </fieldset>
+                    <div class="form-group">
+                        {{ form.submit(class="btn  btn-lg btn-outline-info") }}
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}

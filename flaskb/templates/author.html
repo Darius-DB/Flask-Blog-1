@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{% block content %}
+	<header class="main-header author-head " style="background-image: url(http://s3.amazonaws.com/caymandemo/wp-content/uploads/sites/10/2015/09/30162427/sep2.jpg)">
+	</header>
+	<section class="author-profile inner">
+	<figure class="author-image">
+	<div class="img"> 
+		<img src="{{ url_for('static', filename='assets/img/' + user.image_file) }}" class="rounded-circle">
+		<span class="hidden">David's Picture</span>
+	</div>
+	</figure>
+	<h1 class="author-title">{{ user.username }}</h1>
+	
+	<div class="author-meta">
+		<span class="author-location icon-location">Planet Earth</span>
+		<span class="author-link icon-link"><a href="http://www.wowthemes.net">http://www.wowthemes.net</a></span>
+		<span class="author-stats"><i class="icon-stats"></i> {{ posts.total }}</span>
+	</div>
+	</section>
+	<main class="content" role="main">
+	<div class="grid">
+		{% for post in posts.items %}
+		<div class="grid-item">
+			<article class="post">
+			<div class="wrapgriditem">
+				<header class="post-header">
+				<h2 class="post-title">{{ post.title }}</h2>
+				</header>
+				<section class="post-excerpt">
+				<p>
+					{{ post.content }}
+				</p>
+				</section>
+				<footer class="post-meta">
+				<img class="author-thumb" src="{{ url_for('static', filename='assets/img/' + post.author.image_file) }}" class="rounded-circle" height="70" width="70" alt="{{ post.author.username }}" nopin="nopin"/>
+				{{ post.author.username }}
+				<time class="post-date" datetime="{{ post.date_created }}">{{ post.date_created.strftime('%Y-%m-%d') }}</time>
+				</footer>
+			</div>
+			</article>
+		</div>
+		{% endfor %}
+	</div>
+		
+	<nav class="pagination" role="navigation">
+		{% for page_num in posts.iter_pages() %}
+		
+			{% if page_num %}
+				{% if posts.page == page_num %}
+				
+					{% if posts.has_prev %}
+						<a class="newer-posts" href="{{ url_for('user_posts', page=page_num - 1, username=user.username) }}">&larr; Newer Posts </a>
+					{% endif %}
+					
+					<span class="page-number">Page {{ page_num }}</span>
+					
+					{% if posts.has_next %}
+						<a class="older-posts" href="{{ url_for('user_posts', page=page_num + 1, username=user.username) }}">Older Posts &rarr;</a>
+					{% endif %}
+				
+				{% endif %}
+			{% endif %}
+		
+		{% endfor %}
+	</nav>
+	</main>
+{% endblock content %}

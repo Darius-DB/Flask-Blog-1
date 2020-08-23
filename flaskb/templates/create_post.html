@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<header class="main-header post-head " style="background-image: url(assets/img/random.jpg)">
+    <div class="vertical">
+        <div class="main-header-content inner">
+            <h1 class="post-title">{{ heading }}</h1>
+            <div class="entry-title-divider">
+                <span></span><span></span><span></span>
+            </div>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-12-13">13 December 2016</time> | <a class="scrolltocomments"
+                    href="#disqus_thread">Comments</a>
+            </section>
+        </div>
+    </div>
+</header>
+
+<main id="content" class="content" role="main">
+    <div class="wraps">
+        <div class="grid">
+            <div class="grid-item ">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+
+                    <fieldset class="form-group">
+                        <div class="form-group">
+                            {{ form.title.label(class="form-control-label") }}
+
+                            {% if form.title.errors %}
+                            {{ form.title(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.title(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.content.label(class="form-control-label") }}
+
+                            {% if form.content.errors %}
+                            {{ form.content(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.content.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.content(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        
+
+                        
+                    </fieldset>
+                    <div class="form-group">
+                        {{ form.submit(class="btn  btn-lg btn-outline-info") }}
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}
