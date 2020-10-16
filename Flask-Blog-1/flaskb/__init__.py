@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 from flask_mail import Mail
 
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 
@@ -30,7 +31,9 @@ patch_request_class(app)
 mail = Mail(app)
 
 
+
 from flaskb.main import routes
 from flaskb.users import routes
 from flaskb.posts import routes
 from flaskb.errors import handlers
+from flaskb.api import routes
